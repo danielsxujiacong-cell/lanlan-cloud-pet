@@ -6,26 +6,14 @@
   const status = document.getElementById("feed-status");
   const totalCount = document.getElementById("total-count");
   const todayCount = document.getElementById("today-count");
+  const home = document.querySelector(".home");
   const petFrame = document.getElementById("pet-frame");
-  const petPhoto = document.getElementById("pet-photo");
   const feedFloat = document.getElementById("feed-float");
+  const feedFlight = document.getElementById("feed-flight");
+  const feedParticles = document.getElementById("feed-particles");
   let feeding = false;
   let statusTimer;
   let floatTimer;
-
-  function showPetPhoto() {
-    if (petPhoto.naturalWidth <= 1 || petPhoto.naturalHeight <= 1) {
-      petPhoto.remove();
-      return;
-    }
-    petPhoto.classList.add("is-ready");
-  }
-  petPhoto.addEventListener("load", showPetPhoto);
-  petPhoto.addEventListener("error", () => petPhoto.remove());
-  if (petPhoto.complete) {
-    if (petPhoto.naturalWidth > 0) showPetPhoto();
-    else petPhoto.remove();
-  }
 
   function isConfigured() {
     return typeof config.url === "string" && /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(config.url.trim()) &&
@@ -105,11 +93,35 @@
   function playHappyFeedback() {
     petFrame.classList.remove("happy");
     feedFloat.classList.remove("pop");
+    feedFlight.classList.remove("fly");
+    feedParticles.classList.remove("burst");
+
+    const homeRect = home.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
+    const petRect = petFrame.getBoundingClientRect();
+    const startX = buttonRect.left + buttonRect.width / 2 - homeRect.left;
+    const startY = buttonRect.top + buttonRect.height / 2 - homeRect.top;
+    const petX = petRect.left + petRect.width / 2 - homeRect.left;
+    const petY = petRect.top + petRect.height * 0.34 - homeRect.top;
+
+    feedFlight.style.left = `${startX}px`;
+    feedFlight.style.top = `${startY}px`;
+    feedFlight.style.setProperty("--fly-x", `${petX - startX}px`);
+    feedFlight.style.setProperty("--fly-y", `${petY - startY}px`);
+    feedParticles.style.left = `${petX}px`;
+    feedParticles.style.top = `${petY}px`;
     void petFrame.offsetWidth;
     petFrame.classList.add("happy");
     feedFloat.classList.add("pop");
+    feedFlight.classList.add("fly");
+    feedParticles.classList.add("burst");
     window.clearTimeout(floatTimer);
-    floatTimer = window.setTimeout(() => feedFloat.classList.remove("pop"), 1000);
+    floatTimer = window.setTimeout(() => {
+      petFrame.classList.remove("happy");
+      feedFloat.classList.remove("pop");
+      feedFlight.classList.remove("fly");
+      feedParticles.classList.remove("burst");
+    }, 1000);
     if (typeof navigator.vibrate === "function") navigator.vibrate(28);
   }
 

@@ -15,7 +15,7 @@ Make a small, friendly, mobile-first page where anyone can feed Lanlan and see s
 - Supabase is the source of truth. The browser uses only the public anon/publishable key.
 - RLS grants anonymous select and insert on `public.feed_events`; no update/delete access.
 - Daily count uses the visitor's local timezone. Counts refresh every 10 seconds.
-- Original art was not present at project creation; `assets/lanlan.png` is the intended image path.
+- Original art is reused from the existing Codex desktop pet project `graytu-pet`: its transparent V2 atlas is at `assets/lanlan/spritesheet.webp`, with `pet.json` alongside it. The page uses the atlas idle and waving rows.
 
 ## Key decisions
 

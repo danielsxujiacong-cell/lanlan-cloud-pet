@@ -4,14 +4,15 @@
 
 ## 状态
 
-- **阶段：** V1 MVP，Supabase 匿名读写和共享统计已通过本地实测
+- **阶段：** V1 已上线 GitHub Pages，Supabase 匿名读写和共享统计正常
+- **公网地址：** https://danielsxujiacong-cell.github.io/lanlan-cloud-pet/
 - **主要入口：** `index.html`
 - **最近更新：** 2026-09-28
 
 ## 快速开始
 
 1. 按照 [SETUP.md](SETUP.md) 配置 Supabase 表和匿名权限。浏览器使用的 Publishable key 是公开密钥，不要放入 secret 或 `service_role` key。
-2. 可将蓝蓝图片放在 `assets/lanlan.png`。
+2. 蓝蓝使用 `assets/lanlan/spritesheet.webp` 中的透明待机帧和抬爪反馈帧。
 3. 运行 `python -m http.server 4173`，访问 `http://localhost:4173`。
 
 ## 项目结构
@@ -22,11 +23,11 @@
 | `styles.css` | 浅色、深色与响应式样式 |
 | `app.js` | Supabase REST 写入、云端统计与交互 |
 | `supabase-config.js` | 浏览器公开 Supabase 配置 |
-| `assets/` | 蓝蓝的图片 |
+| `assets/lanlan/` | 旧 Codex 桌宠透明图集及 `pet.json` |
 | `SETUP.md` | Supabase 建表和运行步骤 |
 | `docs/PROJECT_CONTEXT.md` | 项目范围与技术决策 |
 | `docs/HANDOFF.md` | 当前状态和后续步骤 |
 
 ## 同步
 
-在任一台电脑开始修改前先检查 Git 状态并安全同步。完成有意义的修改后，提交并推送到此私有 GitHub 仓库。
+在任一台电脑开始修改前先检查 Git 状态并安全同步。完成有意义的修改后，提交并推送到此公开 GitHub 仓库。
