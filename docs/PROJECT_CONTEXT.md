@@ -24,6 +24,7 @@ Make a small, friendly, mobile-first page where anyone can feed Lanlan and see s
 | 2026-09-28 | Use static HTML/CSS/JS and Supabase REST | Keep V1 simple to run and deploy |
 | 2026-09-28 | Poll shared counts every 10 seconds | Keep all visitors' counts current without a client library |
 | 2026-09-28 | Use Supabase publishable key in the static client | It is public by design; keep secret and service_role keys out of the browser |
+| 2026-09-28 | Use a UUID primary key for `feed_events` | It avoids sequence permissions for anonymous inserts |
 
 ## Verification
 

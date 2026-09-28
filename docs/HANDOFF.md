@@ -3,24 +3,25 @@
 ## Current state
 
 - **Updated:** 2026-09-28
-- **Status:** Supabase URL and publishable key configured; anonymous table grants need repair before end-to-end verification
+- **Status:** V1 connected and verified against the live Supabase project
 - **Source:** Private GitHub repository, branch `main`, initial V1 commit `8dd9c9d`.
-- **Last completed:** Configured the created Supabase project and verified the Data API responds. Anonymous read currently returns `42501 permission denied for table feed_events`.
+- **Last completed:** Granted `anon` select/insert on `public.feed_events`; a local button click inserted one real event and both shared counters read 1.
 
 ## Next action
 
-After approval, run the minimum `GRANT SELECT, INSERT ON public.feed_events TO anon` and identity-sequence grant from `SETUP.md` in the correct project's SQL Editor. Then verify anonymous read/write from the local app and confirm total/today counts. Add Lanlan's original image as `assets/lanlan.png` when available.
+No V1 setup remains. Add Lanlan's original image as `assets/lanlan.png` when available; otherwise the built-in blue cat illustration is used.
 
 ## How to resume
 
 1. Inspect Git status and pull safely if the working tree is clean.
-2. Complete the missing anonymous table grants in Supabase, preserving RLS and no update/delete access.
-3. Run the local app and verify a feed appears as a `feed_events` row and shared counts update.
+2. Run `python -m http.server 4173` and open `http://localhost:4173` for local preview.
+3. For a future change, verify one anonymous feed insert and total/today count refresh without granting update/delete access.
 
 ## Open questions or risks
 
 - Supabase project URL and public publishable key are in `supabase-config.js`; no secret or service_role key is used.
-- The configured endpoint returns a missing SELECT grant error. Cloud write, live counts, and cross-device updates remain unverified until the anonymous grants are confirmed.
+- One live feed event was added as the end-to-end smoke test, so current shared total and today counts are both 1.
+- Cross-device refresh is implemented by 10-second polling; the app was verified against the live shared API but not on a second device.
 
 ## Local verification
 
@@ -28,3 +29,4 @@ After approval, run the minimum `GRANT SELECT, INSERT ON public.feed_events TO a
 - `python -m http.server 4173` serves the page locally.
 - Browser check at 390×844: the page fits one screen, the image placeholder renders, and the browser theme preference switches between light and dark.
 - With the Supabase placeholder config, a button tap shows the requested failure message, disables the button during the cooldown, and does not add a local or fake count.
+- With the live Supabase config, local page loaded the shared counts and one button tap changed both total and today's count from 0 to 1.
