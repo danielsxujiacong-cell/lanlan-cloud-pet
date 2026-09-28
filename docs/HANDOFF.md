@@ -3,7 +3,8 @@
 ## Current state
 
 - **Updated:** 2026-09-28
-- **Status:** V1 source ready; Supabase project setup remains
+- **Status:** V1 source committed and pushed; Supabase project setup remains
+- **Source:** Private GitHub repository, branch `main`, initial V1 commit `8dd9c9d`.
 - **Last completed:** Built and previewed a mobile-first static page with feed feedback, cloud event insertion, shared counts, and system color scheme support.
 
 ## Next action
