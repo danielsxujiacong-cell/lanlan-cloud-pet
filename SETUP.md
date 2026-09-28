@@ -22,7 +22,7 @@ create policy "Anyone can add feed events"
   on public.feed_events for insert to anon with check (true);
 ```
 
-3. 在项目 **Settings → API** 复制 **Project URL** 和 **anon / publishable key**，填进项目根目录的 `supabase-config.js`。只填公开 anon/publishable key，绝不要填 `service_role` key。
+3. 打开项目的 **Connect** 面板，或进入 **Settings → API Keys**，复制 **Project URL** 和 **Publishable key**（旧项目也可使用公开 `anon` key），填进项目根目录的 `supabase-config.js`。绝不要填 `service_role` key。
 4. 把蓝蓝图片替换到 `assets/lanlan.png`。当前文件是透明占位图；没有真实图片时网页会显示内置的蓝猫插画。
 5. 本地预览：在项目目录运行 `python -m http.server 4173`，然后打开 `http://localhost:4173`。部署时上传项目静态文件；`supabase-config.js` 也需要一并部署。
 
