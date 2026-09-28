@@ -22,8 +22,10 @@ create policy "Anyone can add feed events"
   on public.feed_events for insert to anon with check (true);
 ```
 
-3. 打开项目的 **Connect** 面板，或进入 **Settings → API Keys**，复制 **Project URL** 和 **Publishable key**（旧项目也可使用公开 `anon` key），填进项目根目录的 `supabase-config.js`。绝不要填 `service_role` key。
+3. 打开项目的 **Connect** 面板，或进入 **Settings → API Keys**，复制 **Project URL** 和 **Publishable key**（旧项目也可使用公开 `anon` key），填进项目根目录的 `supabase-config.js`。URL 填项目根地址（例如 `https://<project-ref>.supabase.co`），页面会自行请求 `/rest/v1/`。绝不要填 secret 或 `service_role` key。
 4. 把蓝蓝图片替换到 `assets/lanlan.png`。当前文件是透明占位图；没有真实图片时网页会显示内置的蓝猫插画。
 5. 本地预览：在项目目录运行 `python -m http.server 4173`，然后打开 `http://localhost:4173`。部署时上传项目静态文件；`supabase-config.js` 也需要一并部署。
 
 页面直接向 Supabase 写入一条事件，并每 10 秒读取共享总数和今天的数量。今天按访问者设备的本地时区计算。不需要用户账号；数据库仅允许匿名读取和新增事件，不开放修改或删除。
+
+若页面读取时报 `permission denied for table feed_events`，请在 SQL Editor 确认本页脚本中的 `GRANT SELECT, INSERT` 与 sequence `GRANT USAGE, SELECT` 已在当前项目执行。RLS 策略和表权限都必须存在，匿名策略不会自动授予表权限。

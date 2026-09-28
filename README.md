@@ -4,13 +4,13 @@
 
 ## 状态
 
-- **阶段：** V1 MVP，待连接 Supabase
+- **阶段：** V1 MVP，已填写 Supabase 公开配置；匿名读取权限待确认
 - **主要入口：** `index.html`
 - **最近更新：** 2026-09-28
 
 ## 快速开始
 
-1. 按照 [SETUP.md](SETUP.md) 创建 Supabase 表并填写公开 URL 和 anon key。
+1. 按照 [SETUP.md](SETUP.md) 配置 Supabase 表和匿名权限。浏览器使用的 Publishable key 是公开密钥，不要放入 secret 或 `service_role` key。
 2. 可将蓝蓝图片放在 `assets/lanlan.png`。
 3. 运行 `python -m http.server 4173`，访问 `http://localhost:4173`。
 
